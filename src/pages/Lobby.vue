@@ -155,27 +155,33 @@ export default defineComponent({
     this.$eventBus.on('onDisconnected', this.onDisconnected)
   },
   methods: {
+    addChatMessage(msg) {
+      if (this.chatMessages.length === 200) {
+        this.chatMessages.pop()
+      }
+      this.chatMessages.unshift(msg)
+    },
     handleEmoji(emoji) {
       this.inputChatMessage += emoji.unicode
     },
     onDisconnected(data) {
       const msg = messageBuilder.disconnected(data.data, data.now)
-      this.chatMessages.push(msg)
+      this.addChatMessage(msg)
     },
     onLobbyRooms(data) {
       this.lobbyRooms = data.data
     },
     onLeaveLobby(data) {
       const msg = messageBuilder.leaveMessage(data.data, data.now, whereConstant.lobby)
-      this.chatMessages.push(msg)
+      this.addChatMessage(msg)
     },
     onLobbyChat(data) {
       const msg = messageBuilder.chatMessage(data.data.userProfile, data.data.message, data.now)
-      this.chatMessages.push(msg)
+      this.addChatMessage(msg)
     },
     onJoinLobby(data) {
       const msg = messageBuilder.joinMessage(data.data, data.now, whereConstant.lobby)
-      this.chatMessages.push(msg)
+      this.addChatMessage(msg)
     },
     onLobbyUsers(data) {
       this.lobbyUsers = data.data

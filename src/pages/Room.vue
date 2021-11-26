@@ -102,12 +102,18 @@ export default defineComponent({
     this.$eventBus.on('onDisconnected', this.onDisconnected)
   },
   methods: {
+    addChatMessage(msg) {
+      if (this.chatMessages.length === 200) {
+        this.chatMessages.pop()
+      }
+      this.chatMessages.unshift(msg)
+    },
     handleEmoji(emoji) {
       this.inputChatMessage += emoji.unicode
     },
     onDisconnected(data) {
       const msg = messageBuilder.disconnected(data.data, data.now)
-      this.chatMessages.push(msg)
+      this.addChatMessage(msg)
     },
     onJoinRoomSucceeded(data) {
       this.$ws.setAttribute('room', data.data)
@@ -144,18 +150,18 @@ export default defineComponent({
     },
     onJoinRoom(data) {
       const msg = messageBuilder.joinMessage(data.data, data.now, whereConstant.room)
-      this.chatMessages.push(msg)
+      this.addChatMessage(msg)
     },
     onRoomUsers(data) {
       this.roomUsers = data.data
     },
     onRoomChat(data) {
       const msg = messageBuilder.chatMessage(data.data.userProfile, data.data.message, data.now)
-      this.chatMessages.push(msg)
+      this.addChatMessage(msg)
     },
     onLeaveRoom(data) {
       const msg = messageBuilder.leaveMessage(data.data, data.now, whereConstant.room)
-      this.chatMessages.push(msg)
+      this.addChatMessage(msg)
     },
     onLeaveRoomBtn() {
       if (!this.$ws.isConnected()) {
