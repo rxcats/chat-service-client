@@ -1,26 +1,10 @@
 # Chat Service Client
 
-A Quasar Framework app
+## 개요
+- Spring Boot 의 웹소켓 채팅 서비스를 이용하기 위한 vue 기반 클라이언트
 
-## Install the dependencies
-```bash
-yarn
-```
+## 사용 기술
+- Quasar Framework: <https://quasar.dev/>
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
-```
-
-### Lint the files
-```bash
-yarn run lint
-```
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+## 데모
+- Link: <https://rxcats.github.io/chat-service-client/index.html>
