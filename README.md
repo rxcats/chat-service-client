@@ -7,4 +7,4 @@
 - [Quasar Framework](https://quasar.dev)
 
 ## 데모
-- [Link](http://132.226.21.139)
+- [Link](https://apps-rxcats.duckdns.org)
